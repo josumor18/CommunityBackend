@@ -1,7 +1,7 @@
 module Api
     class UsersController < ApplicationController
       protect_from_forgery with: :null_session
-
+      
       # POST
       def login
         user = User.where(email: params[:email]).first
@@ -20,14 +20,18 @@ module Api
       end
 
       # POST
-    def register
-        user = User.new(user_params)
-        if user.save
-          render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
-        elsif user = User.where(email: params[:email]).first
-          render json: { status: 'ERROR', message: 'USUARIO EXISTENTE' }, status: :unauthorized
+      def register
+        user = User.where(email: params[:email]).first
+        if user
+            render json: { status: 'ERROR', message: 'USUARIO EXISTENTE' }, status: :unauthorized
         else
-          render json: { status: 'ERROR', message: 'USUARIO NO CREADO' }, status: :bad
+            user = User.new(user_params)
+            user.isPrivate = true
+            if user.save
+                render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
+            else
+                render json: { status: 'ERROR', message: 'USUARIO NO CREADO' }, status: :bad
+            end
         end
       end
 
@@ -35,6 +39,6 @@ module Api
       def user_params
         params.permit(:name, :email, :password, :tel, :cel, :address)
       end
-      
+
     end
 end
