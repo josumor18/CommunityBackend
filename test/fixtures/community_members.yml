@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_community: 1
+  id_user: 1
+  isAdmin: false
+
+two:
+  id_community: 1
+  id_user: 1
+  isAdmin: false

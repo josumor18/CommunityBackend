@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Community Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id community</th>
+      <th>Id user</th>
+      <th>Isadmin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @community_members.each do |community_member| %>
+      <tr>
+        <td><%= community_member.id_community %></td>
+        <td><%= community_member.id_user %></td>
+        <td><%= community_member.isAdmin %></td>
+        <td><%= link_to 'Show', community_member %></td>
+        <td><%= link_to 'Edit', edit_community_member_path(community_member) %></td>
+        <td><%= link_to 'Destroy', community_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Community Member', new_community_member_path %>

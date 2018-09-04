@@ -1,0 +1,47 @@
+<%= form_for(community) do |f| %>
+  <% if community.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(community.errors.count, "error") %> prohibited this community from being saved:</h2>
+
+      <ul>
+      <% community.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rules %>
+    <%= f.text_field :rules %>
+  </div>
+
+  <div class="field">
+    <%= f.label :photo %>
+    <%= f.text_field :photo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :photo_thumbnail %>
+    <%= f.text_field :photo_thumbnail %>
+  </div>
+
+  <div class="field">
+    <%= f.label :parent_comm %>
+    <%= f.number_field :parent_comm %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

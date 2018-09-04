@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @community.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @community.description %>
+</p>
+
+<p>
+  <strong>Rules:</strong>
+  <%= @community.rules %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @community.photo %>
+</p>
+
+<p>
+  <strong>Photo thumbnail:</strong>
+  <%= @community.photo_thumbnail %>
+</p>
+
+<p>
+  <strong>Parent comm:</strong>
+  <%= @community.parent_comm %>
+</p>
+
+<%= link_to 'Edit', edit_community_path(@community) %> |
+<%= link_to 'Back', communities_path %>
