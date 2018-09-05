@@ -6,7 +6,8 @@ module Api
         def get_communities
 
             user = User.where(id: params[:id]).first
-            if(user.auth_token == params[:auth_token])
+            token = params[:auth_token]
+            if(user.auth_token == token)
                 communities_user = Community_member.where(id_user: user.id)
 
                 communities = []
