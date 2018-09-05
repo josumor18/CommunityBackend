@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(version: 20180904040434) do
     t.string   "name"
     t.string   "description"
     t.string   "rules"
+    t.boolean  "isSubcomminity"
     t.string   "photo"
     t.string   "photo_thumbnail"
-    t.integer  "parent_comm"
+    t.integer  "sub_communities"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
