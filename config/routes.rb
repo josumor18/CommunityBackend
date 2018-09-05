@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   namespace 'api' do
     post 'users/login', to: 'users#login'
     post 'users/register', to: 'users#register'
+    get 'get_communities', to: 'communities#get_communities'
   end
 end
