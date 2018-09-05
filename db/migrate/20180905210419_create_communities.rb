@@ -7,7 +7,7 @@ class CreateCommunities < ActiveRecord::Migration[5.0]
       t.boolean :isSubcomminity
       t.string :photo
       t.string :photo_thumbnail
-      t.string :sub_communities, :array => true
+      t.integer :sub_communities, :array => true
 
       t.timestamps
     end

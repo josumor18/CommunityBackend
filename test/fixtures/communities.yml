@@ -7,7 +7,7 @@ one:
   isSubcomminity: false
   photo: MyString
   photo_thumbnail: MyString
-  sub_communities: MyString
+  sub_communities: 1
 
 two:
   name: MyString
@@ -16,4 +16,4 @@ two:
   isSubcomminity: false
   photo: MyString
   photo_thumbnail: MyString
-  sub_communities: MyString
+  sub_communities: 1
