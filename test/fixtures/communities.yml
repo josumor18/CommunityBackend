@@ -4,14 +4,16 @@ one:
   name: MyString
   description: MyString
   rules: MyString
+  isSubcomminity: false
   photo: MyString
   photo_thumbnail: MyString
-  parent_comm: 1
+  sub_communities: MyString
 
 two:
   name: MyString
   description: MyString
   rules: MyString
+  isSubcomminity: false
   photo: MyString
   photo_thumbnail: MyString
-  parent_comm: 1
+  sub_communities: MyString

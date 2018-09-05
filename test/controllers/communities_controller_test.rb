@@ -17,7 +17,7 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create community" do
     assert_difference('Community.count') do
-      post communities_url, params: { community: { description: @community.description, name: @community.name, parent_comm: @community.parent_comm, photo: @community.photo, photo_thumbnail: @community.photo_thumbnail, rules: @community.rules } }
+      post communities_url, params: { community: { description: @community.description, isSubcomminity: @community.isSubcomminity, name: @community.name, photo: @community.photo, photo_thumbnail: @community.photo_thumbnail, rules: @community.rules, sub_communities: @community.sub_communities } }
     end
 
     assert_redirected_to community_url(Community.last)
@@ -34,7 +34,7 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update community" do
-    patch community_url(@community), params: { community: { description: @community.description, name: @community.name, parent_comm: @community.parent_comm, photo: @community.photo, photo_thumbnail: @community.photo_thumbnail, rules: @community.rules } }
+    patch community_url(@community), params: { community: { description: @community.description, isSubcomminity: @community.isSubcomminity, name: @community.name, photo: @community.photo, photo_thumbnail: @community.photo_thumbnail, rules: @community.rules, sub_communities: @community.sub_communities } }
     assert_redirected_to community_url(@community)
   end
 

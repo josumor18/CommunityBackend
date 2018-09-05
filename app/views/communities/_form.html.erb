@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :isSubcomminity %>
+    <%= f.check_box :isSubcomminity %>
+  </div>
+
+  <div class="field">
     <%= f.label :photo %>
     <%= f.text_field :photo %>
   </div>
@@ -37,8 +42,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :parent_comm %>
-    <%= f.number_field :parent_comm %>
+    <%= f.label :sub_communities %>
+    <%= f.text_field :sub_communities %>
   </div>
 
   <div class="actions">
