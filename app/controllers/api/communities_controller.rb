@@ -1,5 +1,5 @@
 module Api
-    class UsersController < ApplicationController
+    class CommunitiesController < ApplicationController
       protect_from_forgery with: :null_session
 
         #GET communities
