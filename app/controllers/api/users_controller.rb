@@ -7,15 +7,22 @@ module Api
         user = User.where(email: params[:email]).first
         pass = params[:password]
         if (user && user.password == pass)
-          #---------- Cambiar authentication token ----------
-          user.auth_token = nil
-          o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-          user.auth_token = (0...20).map { o[rand(o.length)] }.join
-          user.save
-          #--------------------------------------------------
-          render json: { status: 'SUCCESS', message: 'SESION INICIADA', data:user }, status: :ok
+            #---------- Cambiar authentication token ----------
+            user.auth_token = nil
+            o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+            user.auth_token = (0...20).map { o[rand(o.length)] }.join
+            user.save
+            #--------------------------------------------------
+
+            comm_admin = CommunityMember.where(id_user: user.id).where(isAdmin: true)
+            list_com_admin = []
+            comm_admin.each do |item|
+                list_com_admin.push(item.id_community)
+            end
+
+            render json: { status: 'SUCCESS', message: 'SESION INICIADA', data:user, list_com_admin: list_com_admin }, status: :ok
         else
-          render json: { status: 'INVALID', message: 'Error al iniciar sesion'}, status: :unauthorized
+            render json: { status: 'INVALID', message: 'Error al iniciar sesion'}, status: :unauthorized
         end
       end
 
