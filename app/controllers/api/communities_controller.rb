@@ -8,7 +8,7 @@ module Api
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
             if(user.auth_token == token)
-                communities_user = Community_member.where(id_user: user.id)
+                communities_user = CommunityMember.where(id_user: user.id)
 
                 communities = []
                 comms = Community.where(isSubcomunity: false)
