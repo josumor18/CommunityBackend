@@ -4,7 +4,7 @@ class CreateCommunities < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :description
       t.string :rules, :array => true
-      t.boolean :isSubcomminity
+      t.boolean :isSubcommunity
       t.string :photo
       t.string :photo_thumbnail
       t.integer :sub_communities, :array => true

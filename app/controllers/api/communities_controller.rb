@@ -11,8 +11,8 @@ module Api
                 communities_user = CommunityMember.where(id_user: user.id)
 
                 communities = []
-                comms = Community.where(isSubcomunity: false)
-                subcomms = Community.where(isSubcomunity: true)
+                comms = Community.where(isSubcommunity: false)
+                subcomms = Community.where(isSubcommunity: true)
 
                 comms.each do |item|
                     if(communities_user.id_community == item && communities_user.isAdmin == true)

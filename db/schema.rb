@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905210419) do
+ActiveRecord::Schema.define(version: 20180906020540) do
 
   create_table "communities", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "rules"
-    t.boolean  "isSubcomminity"
+    t.boolean  "isSubcommunity"
     t.string   "photo"
     t.string   "photo_thumbnail"
     t.integer  "sub_communities"
