@@ -14,30 +14,19 @@ module Api
                 comms = Community.where(isSubcommunity: false)
                 subcomms = Community.where(isSubcommunity: true)
 
-                comms.each do |item|
-                    if(communities_user.id_community == item && communities_user.isAdmin == true)
-                        communities.push(item)
-                        if(item.sub_communities != nil)
-                            subcomunidades = item.sub_communities
-                            subcomunidades.each do |item_sub|
-                                subcomms.each do |item_subcomm|
-                                    if(item_subcomm.id == item_sub)
-                                        communities.push(item_subcomm)
-                                    end
-                                end
-                            end
-                        end
-                    end
 
-                    if(communities_user.id_community == item && communities_user.isAdmin == false)
-                        communities.push(item)
-                        if(item.sub_communities != nil)
-                            subcomunidades = item.sub_communities
+                communities_user.each do |item|
+                    comm = Community.where(isSubcommunity: false).where(id: item.id_community).first
+                    if(comm)
+                        communities.push(comm)
+                        if(comm.sub_communities != nil)
+                            subcomunidades = comm.sub_communities
                             subcomunidades.each do |item_sub|
-                                subcomms.each do |item_subcomm|
-                                    if(item_subcomm.id == item_sub)
-                                        communities.push(item_subcomm)
-                                    end
+                                sub_com = communities_user.where(id_community: item_sub).first
+
+                                if(sub_com)
+                                    subcomm = Community.where(isSubcommunity: true).where(id: item_sub).first
+                                    communities.push(subcomm)
                                 end
                             end
                         end
