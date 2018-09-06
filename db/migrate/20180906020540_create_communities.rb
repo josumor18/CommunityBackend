@@ -3,11 +3,11 @@ class CreateCommunities < ActiveRecord::Migration[5.0]
     create_table :communities do |t|
       t.string :name
       t.string :description
-      t.string :rules, :array => true
-      t.boolean :isSubcomminity
+      t.string :rules
+      t.boolean :isSubcommunity
       t.string :photo
       t.string :photo_thumbnail
-      t.integer :sub_communities, :array => true
+      t.integer :sub_communities
 
       t.timestamps
     end

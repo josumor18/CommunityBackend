@@ -4,7 +4,7 @@ one:
   name: MyString
   description: MyString
   rules: MyString
-  isSubcomminity: false
+  isSubcommunity: false
   photo: MyString
   photo_thumbnail: MyString
   sub_communities: 1
@@ -13,7 +13,7 @@ two:
   name: MyString
   description: MyString
   rules: MyString
-  isSubcomminity: false
+  isSubcommunity: false
   photo: MyString
   photo_thumbnail: MyString
   sub_communities: 1
