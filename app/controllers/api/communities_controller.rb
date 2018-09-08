@@ -55,7 +55,7 @@ module Api
             pass = params[:auth_token]
             busqueda = params[:busqueda]
             if (user && user.auth_token == pass)
-                communities = Community.all
+                communities = Community..where(isSubcommunity:false)
                 communities_user = CommunityMember.where(id_user: user.id)
 
                 resultados = []
