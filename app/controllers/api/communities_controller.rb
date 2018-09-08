@@ -82,6 +82,13 @@ module Api
                     end
                 end
 
+                #---------- Cambiar authentication token ----------
+                user.auth_token = nil
+                o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                user.save
+                #--------------------------------------------------
+
                 render json: { status: 'SUCCESS', message: 'Comunidades obtenidas', resultados: resultados, solicitudes: solicitudes, auth_token: user.auth_token }, status: :ok
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
