@@ -49,6 +49,45 @@ module Api
 
         end
 
+        #GET search_community
+        def search_community
+            user = User.where(id: params[:id]).first
+            pass = params[:auth_token]
+            busqueda = params[:busqueda]
+            if (user && user.auth_token == pass)
+                communities = Community.all
+                communities_user = CommunityMember.where(id_user: user.id)
+
+                resultados = []
+                solicitudes = []
+              
+                communities.each do |community|
+                    if(((community.name).downcase).include? busqueda.downcase)
+                        isMember = false
+                        communities_user.each do |comm|
+                            if(community.id == comm.id_community)
+                                isMember = true
+                            end
+                        end
+                        if(!isMember)
+                            resultados.push(community)
+
+                            req = Request.where(id_community:community.id).where(id_user:user.id).first
+                            if(req)
+                                solicitudes.push(true)
+                            else
+                                solicitudes.push(false)
+                            end
+                        end
+                    end
+                end
+
+                render json: { status: 'SUCCESS', message: 'Comunidades obtenidas', resultados: resultados, solicitudes: solicitudes, auth_token: user.auth_token }, status: :ok
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
 
 
     end
