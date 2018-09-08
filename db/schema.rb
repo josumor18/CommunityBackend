@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906020540) do
+ActiveRecord::Schema.define(version: 20180908200011) do
 
   create_table "communities", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20180906020540) do
     t.integer  "id_community"
     t.integer  "id_user"
     t.boolean  "isAdmin"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "id_community"
+    t.integer  "id_user"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
