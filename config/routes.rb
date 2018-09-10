@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     get 'communities/search_community', to: 'communities#search_community'
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
-    delete 'requests/delete', to: 'requests#delete'
+    post 'requests/delete', to: 'requests#delete'
   end
 end
