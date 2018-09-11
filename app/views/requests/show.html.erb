@@ -10,5 +10,10 @@
   <%= @request.id_user %>
 </p>
 
+<p>
+  <strong>Seen:</strong>
+  <%= @request.seen %>
+</p>
+
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>

@@ -69,6 +69,6 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:id_community, :id_user)
+      params.require(:request).permit(:id_community, :id_user, :seen)
     end
 end
