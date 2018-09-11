@@ -2,29 +2,31 @@ module Api
     class CommunitiesController < ApplicationController
       protect_from_forgery with: :null_session
 
-        #POST create community
+        #POST create
         def create
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
             if(user.auth_token == token)
                 com = Community.new(community_params)
-
+    
                 if(com.save)
+                    CommunityMember.new(id_community: com.id, id_user: user.id, isAdmin: true).save
                     #---------- Cambiar authentication token ----------
                     user.auth_token = nil
                     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
                     user.auth_token = (0...20).map { o[rand(o.length)] }.join
                     user.save
                     #--------------------------------------------------
-                    render json: { status: 'SUCCESS', message: 'Comunidad creada', auth_token: user.auth_token }, status: :created
+                    render json: { status: 'SUCCESS', message: 'Comunidad creada', id_community: com.id, auth_token: user.auth_token }, status: :created
                 else
                     render json: { status: 'INVALID', message: 'Error al crear comunidad'}, status: :unauthorized
                 end
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
+            
         end
-
+        
         #GET communities
         def get_communities
 
@@ -149,6 +151,7 @@ module Api
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
+
 
         private
         def community_params
