@@ -8,6 +8,7 @@ module Api
             token = params[:auth_token]
             if(user.auth_token == token)
                 com = Community.new(community_params)
+                com.sub_communities = []
     
                 if(com.save)
                     CommunityMember.new(id_community: com.id, id_user: user.id, isAdmin: true).save
