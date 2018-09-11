@@ -4,7 +4,7 @@ module Api
 
       def create
           
-          post = News.new(title: params[:title], description: params[:description], date: params[:date], photo: params[:photo], approved: params[:approved])
+          post = New.new(title: params[:title], description: params[:description], date: params[:date], photo: params[:photo], approved: params[:approved])
           if (post.save)
             
             #amigos = Amigo.where(id_user1: user.id)
