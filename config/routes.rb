@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   namespace 'api' do
     post 'users/login', to: 'users#login'
     post 'users/register', to: 'users#register'
+    put 'users/edit', to: 'users#edit'
     get 'communities/get_communities', to: 'communities#get_communities'
     get 'communities/search_community', to: 'communities#search_community'
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
     delete 'requests/delete', to: 'requests#delete'
+
   end
 end
