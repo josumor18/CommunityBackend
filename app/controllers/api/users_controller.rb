@@ -58,7 +58,7 @@ module Api
           user.update(:tel=>params[:tel])
           user.update(:address=>params[:address])
           user.update(:isPrivate=>params[:isPrivate])
-          render json: { status: 'SUCCESS', message: 'CAMBIO EXITOSO',authentication_token:user.auth_token}, status: :ok
+          render json: { status: 'SUCCESS', message: 'CAMBIO EXITOSO',auth_token:user.auth_token}, status: :ok
         else
           render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
           
