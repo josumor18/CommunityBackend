@@ -35,7 +35,7 @@ module Api
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
             if(user.auth_token == token)
-                req = Request.new(id_community: params[:id_community], id_user: user.id)
+                req = Request.new(id_community: params[:id_community], id_user: user.id, seen: false)
 
                 if(req.save)
                     #---------- Cambiar authentication token ----------

@@ -95,7 +95,37 @@ module Api
             end
         end
 
+        #GET members
+        def get_members
+            user = User.where(id: params[:id]).first
+            pass = params[:auth_token]
+            if (user && user.auth_token == pass)
+                community_members = CommunityMember.where(id_community: params[:id_community])
 
+                user_ids = []
+                user_names = []
+                id_members.each do |id_member|
+                    user_ids.push(id_member.id_user)
+                    member = User.where(id: id_member.id_user).first
+                    if(member)
+                        user_names.push(member.name)
+                    else
+                        user_names.push("(Sin nombre)")
+                    end
+                end
+
+                 #---------- Cambiar authentication token ----------
+                 user.auth_token = nil
+                 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                 user.save
+                 #--------------------------------------------------
+ 
+                 render json: { status: 'SUCCESS', message: 'Miembros obtenidos', id_members: user_ids, name_members: user_names, auth_token: user.auth_token }, status: :ok
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
 
     end
 end

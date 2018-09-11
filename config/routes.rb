@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     put 'users/edit', to: 'users#edit'
     get 'communities/get_communities', to: 'communities#get_communities'
     get 'communities/search_community', to: 'communities#search_community'
+    get 'communities/get_members', to: 'communities#get_members'
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
     delete 'requests/delete', to: 'requests#delete'
