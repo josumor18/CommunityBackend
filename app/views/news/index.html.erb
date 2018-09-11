@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Idcommunity</th>
       <th>Title</th>
       <th>Description</th>
       <th>Date</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @news.each do |news| %>
       <tr>
+        <td><%= news.idCommunity %></td>
         <td><%= news.title %></td>
         <td><%= news.description %></td>
         <td><%= news.date %></td>
