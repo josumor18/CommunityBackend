@@ -66,34 +66,5 @@ module Api
             end
         end
 
-
-
-
-
-        #########################
-        #POST create community
-        def create_com
-            user = User.where(id: params[:id]).first
-            token = params[:auth_token]
-            if(user.auth_token == token)
-                com = Community.new(name:params[:name], description: params[:description], rules: params[:rules], isSubcommunity:params[:isSubcommunity], photo:params[:photo], photo_thumbnail:params[:photo_thumbnail])#community_params)
-    
-                if(com.save)
-                    #---------- Cambiar authentication token ----------
-                    user.auth_token = nil
-                    o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-                    user.auth_token = (0...20).map { o[rand(o.length)] }.join
-                    user.save
-                    #--------------------------------------------------
-                    render json: { status: 'SUCCESS', message: 'Comunidad creada', auth_token: user.auth_token }, status: :created
-                else
-                    render json: { status: 'INVALID', message: 'Error al crear comunidad'}, status: :unauthorized
-                end
-            else
-                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
-            end
-            
-        end
-
     end
 end
