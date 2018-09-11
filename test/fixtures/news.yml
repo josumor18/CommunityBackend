@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  idCommunity: 
   title: MyString
   description: MyString
-  date: 2018-09-11 14:14:50
+  date: 2018-09-11 17:19:28
   photo: MyString
   approved: false
 
 two:
+  idCommunity: 
   title: MyString
   description: MyString
-  date: 2018-09-11 14:14:50
+  date: 2018-09-11 17:19:28
   photo: MyString
   approved: false

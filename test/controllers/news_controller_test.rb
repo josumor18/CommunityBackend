@@ -6,7 +6,7 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get news_index_url
+    get news_url
     assert_response :success
   end
 
@@ -16,11 +16,11 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create news" do
-    assert_difference('News.count') do
-      post news_index_url, params: { news: { approved: @news.approved, date: @news.date, description: @news.description, photo: @news.photo, title: @news.title } }
+    assert_difference('New.count') do
+      post news_url, params: { news: { approved: @news.approved, date: @news.date, description: @news.description, idCommunity: @news.idCommunity, photo: @news.photo, title: @news.title } }
     end
 
-    assert_redirected_to news_url(News.last)
+    assert_redirected_to news_url(New.last)
   end
 
   test "should show news" do
@@ -34,15 +34,15 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update news" do
-    patch news_url(@news), params: { news: { approved: @news.approved, date: @news.date, description: @news.description, photo: @news.photo, title: @news.title } }
+    patch news_url(@news), params: { news: { approved: @news.approved, date: @news.date, description: @news.description, idCommunity: @news.idCommunity, photo: @news.photo, title: @news.title } }
     assert_redirected_to news_url(@news)
   end
 
   test "should destroy news" do
-    assert_difference('News.count', -1) do
+    assert_difference('New.count', -1) do
       delete news_url(@news)
     end
 
-    assert_redirected_to news_index_url
+    assert_redirected_to news_url
   end
 end
