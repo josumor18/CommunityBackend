@@ -33,7 +33,7 @@ module Api
             render json: { status: 'ERROR', message: 'USUARIO EXISTENTE' }, status: :unauthorized
         else
             user = User.new(user_params)
-            user.isPrivate = true
+            user.isPrivate = false
             if user.save
                 render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
             else
