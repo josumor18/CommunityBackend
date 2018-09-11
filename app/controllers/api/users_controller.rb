@@ -44,7 +44,7 @@ module Api
 
       def edit
         user = User.where(id: params[:id]).first
-        token = params[:authentication_token]
+        token = params[:auth_token]
 
         if (user && user.auth_token==token)
           #---------- Cambiar authentication token ----------
