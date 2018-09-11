@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :news
   resources :requests
   resources :communities
   resources :users
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
     delete 'requests/delete', to: 'requests#delete'
+    post 'news/create', to: 'news#create'
 
   end
 end
