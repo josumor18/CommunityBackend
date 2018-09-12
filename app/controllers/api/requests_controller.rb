@@ -66,5 +66,18 @@ module Api
             end
         end
 
+        #GET community resquests
+        def count_new_requests
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                cant = Request.where(id_community: params[:id_community]).where(seen: false).count
+
+                render json: { status: 'SUCCESS', message: 'Cantidad de solicitudes obtenidas', cantidad: cant }, status: :ok
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
     end
 end
