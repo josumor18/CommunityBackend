@@ -43,7 +43,7 @@ module Api
                 mem = CommunityMember.new(id_community: params[:id_community], id_user: params[:id_user], isAdmin: false)
 
                 if(mem.save)
-                    Request.where(id_community: params[:id_community]),where(id_user: params[:id_user]).destroy_all
+                    Request.where(id_community: params[:id_community]).where(id_user: params[:id_user]).destroy_all
 
                     #---------- Cambiar authentication token ----------
                     user.auth_token = nil
