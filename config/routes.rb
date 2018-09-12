@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get 'requests/count_new_requests', to: 'requests#count_new_requests'
     post 'news/create', to: 'news#create'
     get 'news/get_news', to: 'news#get_news'
+    get 'news/get_news_status', to: 'news#get_news_status'
 
   end
 end

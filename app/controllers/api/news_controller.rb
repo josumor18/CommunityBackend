@@ -42,6 +42,22 @@ module Api
       render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
     end
 
+    def get_news_status
+      com = Community.where(id: params[:id]).first
+      
+      publicaciones = []
+      posts = New.where(approved: params[:isApproved])
+      posts.each do |item|
+        if(com.id == item.idCommunity)
+          publicaciones.push(item)
+        end
+
+      end
+      
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
+
+    end
+
         
 
     end
