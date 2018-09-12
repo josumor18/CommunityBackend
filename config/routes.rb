@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post 'requests/create', to: 'requests#create'
     delete 'requests/delete', to: 'requests#delete'
     post 'news/create', to: 'news#create'
+    get 'news/get_news', to: 'news#get_news'
 
   end
 end

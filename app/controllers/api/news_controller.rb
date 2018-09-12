@@ -4,7 +4,7 @@ module Api
 
       def create
           
-          post = New.new(title: params[:title], description: params[:description], date: params[:date], photo: params[:photo], approved: params[:approved])
+          post = New.new(idCommunity: params[:idCommunity], title: params[:title], description: params[:description], date: params[:date], photo: params[:photo], approved: params[:approved])
           if (post.save)
             
             #amigos = Amigo.where(id_user1: user.id)
@@ -25,6 +25,21 @@ module Api
             render json: { status: 'INVALID', message: 'Error al guardar difusion'}, status: :unauthorized
           end
       
+    end
+
+    def get_news
+      com = Community.where(id: params[:id]).first
+      
+      publicaciones = []
+      posts = New.all
+      posts.each do |item|
+        if(com.id == item.idCommunity)
+          publicaciones.push(item)
+        end
+
+      end
+      
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
     end
 
         
