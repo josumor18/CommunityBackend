@@ -12,10 +12,10 @@ module Api
                 seens = []
 
                 reqs.each do |req|
-                    user = User.where(id: req.id_user).first
+                    user_req = User.where(id: req.id_user).first
 
-                    if(user)
-                        users_req.push(user)
+                    if(user_req)
+                        users_req.push(user_req)
                     end
                     
                     seens.push(req.seen)
