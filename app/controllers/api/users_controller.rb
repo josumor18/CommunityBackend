@@ -65,6 +65,18 @@ module Api
         end
       end
 
+      def update_image
+        user = User.where(id: params[:id]).first
+        if(user)
+          user.photo = params[:photo]
+          user.photo_thumbnail = params[:photo_thumbnail]
+          user.save
+          render json: { status: 'SUCCESS', message: 'USUARIO MODIFICADO (fotos)' }, status: :ok
+        else
+          render json: { status: 'SUCCESS', message: 'USUARIO NO MODIFICADO'}, status: :unauthorized
+        end
+      end
+
       private
       def user_params
         params.permit(:name, :email, :password, :tel, :cel, :address)
