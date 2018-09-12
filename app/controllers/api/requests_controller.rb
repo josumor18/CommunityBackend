@@ -11,6 +11,8 @@ module Api
                 users_req = []
                 seens = []
 
+                reqs.order("created_at ASC")
+
                 reqs.each do |req|
                     user_req = User.where(id: req.id_user).first
 
