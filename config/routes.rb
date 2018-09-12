@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get 'communities/get_members', to: 'communities#get_members'
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
+    post 'requests/accept', to: 'requests#accept'
+    #put 'requests/put_seens', to: 'requests#put_seens'
     delete 'requests/delete', to: 'requests#delete'
     get 'requests/count_new_requests', to: 'requests#count_new_requests'
     post 'news/create', to: 'news#create'
