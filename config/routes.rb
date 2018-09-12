@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'requests/get', to: 'requests#get'
     post 'requests/create', to: 'requests#create'
     delete 'requests/delete', to: 'requests#delete'
+    get 'requests/count_new_requests', to: 'requests#count_new_requests'
     post 'news/create', to: 'news#create'
     get 'news/get_news', to: 'news#get_news'
 
