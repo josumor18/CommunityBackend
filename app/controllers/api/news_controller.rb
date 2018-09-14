@@ -58,6 +58,19 @@ module Api
 
     end
 
+    def approve_news
+      n = New.where(id: params[:id]).first
+      if (n)
+        
+        n.update(:approved=>true)
+        
+        render json: { status: 'SUCCESS', message: 'APROBACION EXITOSA'}, status: :ok
+      else
+        render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
+        
+      end
+    end
+
         
 
     end
