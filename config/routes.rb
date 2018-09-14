@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post 'news/create', to: 'news#create'
     get 'news/get_news', to: 'news#get_news'
     get 'news/get_news_status', to: 'news#get_news_status'
+    put 'news/approve_news', to: 'news#approve_news'
 
   end
 end
