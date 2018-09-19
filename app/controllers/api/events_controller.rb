@@ -57,9 +57,11 @@ module Api
                 communities.each do |comm|
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
-                        events.push(e)
-                        com = Community.where(id: e.id_community).first
-                        comm_names.push(com.name)
+                        if(e.approved == true || comm.isAdmin == true)
+                            events.push(e)
+                            com = Community.where(id: e.id_community).first
+                            comm_names.push(com.name)
+                        end
                     end
                 end
     
