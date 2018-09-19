@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :favorites
   resources :events
   resources :news
   resources :requests
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
     get 'events/get_comm_events', to: 'events#get_comm_events'
     get 'events/get_user_events', to: 'events#get_user_events'
     delete 'news/delete_news', to: 'news#delete_news'
-
+    post 'favorites/create', to: 'favorites#create'
+    get 'favorites/get_newsFavorites', to: 'favorites#get_newsFavorites'
   end
 end

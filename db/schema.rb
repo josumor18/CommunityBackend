@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919020346) do
+ActiveRecord::Schema.define(version: 20180919221815) do
 
   create_table "communities", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 20180919020346) do
     t.boolean  "approved"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "id_user"
+    t.integer  "id_news"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "news", force: :cascade do |t|
