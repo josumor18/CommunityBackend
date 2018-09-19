@@ -56,7 +56,7 @@ module Api
                 communities.each do |comm|
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
-                        events.push(ev)
+                        events.push(e)
                     end
                 end
     
