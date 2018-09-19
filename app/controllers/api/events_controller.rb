@@ -52,12 +52,16 @@ module Api
             if(user.auth_token == token)
                 communities = CommunityMember.where(id_user: user.id)
                 events = []
+                comm_names = []
 
                 communities.each do |comm|
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
                         events.push(e)
                     end
+
+                    com = Community.where(id: comm.id_community).first
+                    comm_names.push(com.name)
                 end
     
                 #---------- Cambiar authentication token ----------
@@ -66,7 +70,7 @@ module Api
                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
                 user.save
                 #--------------------------------------------------
-                render json: { status: 'SUCCESS', message: 'Eventos obtenidos', events: events, auth_token: user.auth_token }, status: :ok
+                render json: { status: 'SUCCESS', message: 'Eventos obtenidos', events: events, comm_names: comm_names, auth_token: user.auth_token }, status: :ok
 
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
