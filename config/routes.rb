@@ -29,5 +29,7 @@ Rails.application.routes.draw do
     post 'events/create', to: 'events#create'
     get 'events/get_comm_events', to: 'events#get_comm_events'
     get 'events/get_user_events', to: 'events#get_user_events'
+    delete 'news/delete_news', to: 'news#delete_news'
+
   end
 end
