@@ -30,8 +30,16 @@ module Api
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
             if(user.auth_token == token)
-                events = Event.where(id_community: params[:id_community])
+                community = CommunityMember.where(id_user: user.id).where(id_community: params[:id_community]).first
+                events = []
+                if(community.isAdmin == true)
+                    events = Event.where(id_community: params[:id_community])
+                else
+                    events = Event.where(id_community: params[:id_community]).where(approved: true)
+                end
+                
     
+                
                 #---------- Cambiar authentication token ----------
                 user.auth_token = nil
                 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
