@@ -58,10 +58,9 @@ module Api
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
                         events.push(e)
+                        com = Community.where(id: e.id_community).first
+                        comm_names.push(com.name)
                     end
-
-                    com = Community.where(id: comm.id_community).first
-                    comm_names.push(com.name)
                 end
     
                 #---------- Cambiar authentication token ----------
