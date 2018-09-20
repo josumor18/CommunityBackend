@@ -21,7 +21,7 @@ module Api
       publicaciones = []
       postsFav = Favorite.all
       postsFav.each do |item|
-        if(usr.id == item.id_news)
+        if(usr.id == item.id_user)
           publicaciones.push(item)
         end
 
