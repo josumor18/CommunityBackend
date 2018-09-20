@@ -27,7 +27,7 @@ module Api
 
       end
       
-      render json: { status: 'SUCCESS', message: 'Comentarios obtenidos', news: comentarios}, status: :ok
+      render json: { status: 'SUCCESS', message: 'Comentarios obtenidos', comentarios: comentarios}, status: :ok
     end
 
 
