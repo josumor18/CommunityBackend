@@ -72,7 +72,7 @@ module Api
                 end
 
                 #events = events.order('start ASC')
-                events.sort_by { |h| h[:start] }.reverse
+                events = events.sort_by { |h| h.start }
 
                 events.each do |e|
                     com = Community.where(id: e.id_community).first
