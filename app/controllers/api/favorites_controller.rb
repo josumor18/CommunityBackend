@@ -22,7 +22,7 @@ module Api
       postsFav = Favorite.all
       postsFav.each do |item|
         if(usr.id == item.id_user)
-          post = New.where(id : item.id_news).first
+          post = New.where(id => item.id_news).first
           res.push(post)
         end
 
