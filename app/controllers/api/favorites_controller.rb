@@ -18,16 +18,17 @@ module Api
       usr = User.where(id: params[:id]).first
 
       
-      publicaciones = []
+      res = []
       postsFav = Favorite.all
       postsFav.each do |item|
         if(usr.id == item.id_user)
-          publicaciones.push(item)
+          post = New.where(id : item.id_news).first
+          res.push(post)
         end
 
       end
       
-      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas de favoritos', news: publicaciones}, status: :ok
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas de favoritos', news: res}, status: :ok
     end
 
  
