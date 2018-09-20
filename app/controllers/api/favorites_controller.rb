@@ -16,7 +16,7 @@ module Api
 
     def get_newsFavorites
       res = []
-      favs = Favorite.where(id_user = params[:id])
+      favs = Favorite.where(id_user : params[:id])
 
       favs.each do |item|
           post = New.where(id : item.id_news).first
