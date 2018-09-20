@@ -38,7 +38,7 @@ module Api
                     events = Event.where(id_community: params[:id_community]).where(approved: true)
                 end
                 
-                events.order('start ASC')
+                events = events.order('start ASC')
                 
                 #---------- Cambiar authentication token ----------
                 user.auth_token = nil
@@ -71,7 +71,8 @@ module Api
                     end
                 end
 
-                events.order('start ASC')
+                events = events.order('start ASC')
+                
                 events.each do |e|
                     com = Community.where(id: e.id_community).first
                     comm_names.push(com.name)
