@@ -37,5 +37,7 @@ Rails.application.routes.draw do
     post 'comments/create', to: 'comments#create'
     delete 'comments/delete_comments', to: 'comments#delete_comments'
     get 'comments/get_comments', to: 'comments#get_comments'
+    put 'events/approve', to: 'events#approve'
+    delete 'events/delete', to: 'events#delete'
   end
 end
