@@ -92,6 +92,46 @@ module Api
             end
         end
 
+        def approve
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                event = Event.where(id: params[:id_event]).first
+                event.update(:approved=>true)
+                
+                #---------- Cambiar authentication token ----------
+                user.auth_token = nil
+                o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                user.save
+                #--------------------------------------------------
+                
+                render json: { status: 'SUCCESS', message: 'Evento actualizado', auth_token: user.auth_token }, status: :ok
+
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
+        def delete
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                e = Event.where(id: params[:id_event]).first
+                if (n)
+                    
+                    Event.where(id: params[:id_event]).destroy_all
+                    
+                    render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
+                else
+                    render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
+                    
+                end
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
 
         private
         def event_params
