@@ -38,7 +38,8 @@ module Api
                     events = Event.where(id_community: params[:id_community]).where(approved: true)
                 end
                 
-                events = events.order('start ASC')
+                #events = events.order('start ASC')
+                events = events.sort_by { |h| [h.dateEvent, h.start] }
                 
                 #---------- Cambiar authentication token ----------
                 user.auth_token = nil
