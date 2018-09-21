@@ -38,7 +38,8 @@ module Api
                     events = Event.where(id_community: params[:id_community]).where(approved: true)
                 end
                 
-    
+                #events = events.order('start ASC')
+                events = events.sort_by { |h| [h.dateEvent, h.start] }
                 
                 #---------- Cambiar authentication token ----------
                 user.auth_token = nil
@@ -65,14 +66,19 @@ module Api
                 communities.each do |comm|
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
-                        if(e.approved == true || comm.isAdmin == true)
+                        if(e.approved == true)
                             events.push(e)
-                            com = Community.where(id: e.id_community).first
-                            comm_names.push(com.name)
                         end
                     end
                 end
-    
+
+                #events = events.order('start ASC')
+                events = events.sort_by { |h| [h.dateEvent, h.start] }
+
+                events.each do |e|
+                    com = Community.where(id: e.id_community).first
+                    comm_names.push(com.name)
+                end
                 #---------- Cambiar authentication token ----------
                 user.auth_token = nil
                 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
@@ -81,6 +87,46 @@ module Api
                 #--------------------------------------------------
                 render json: { status: 'SUCCESS', message: 'Eventos obtenidos', events: events, comm_names: comm_names, auth_token: user.auth_token }, status: :ok
 
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
+        def approve
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                event = Event.where(id: params[:id_event]).first
+                event.update(:approved=>true)
+                
+                #---------- Cambiar authentication token ----------
+                user.auth_token = nil
+                o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                user.save
+                #--------------------------------------------------
+                
+                render json: { status: 'SUCCESS', message: 'Evento actualizado', auth_token: user.auth_token }, status: :ok
+
+            else
+                render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
+
+        def delete
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                e = Event.where(id: params[:id_event]).first
+                if (e)
+                    
+                    Event.where(id: params[:id_event]).destroy_all
+                    
+                    render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
+                else
+                    render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
+                    
+                end
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end

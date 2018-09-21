@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :favorites
   resources :events
   resources :news
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     post 'users/register', to: 'users#register'
     put 'users/edit', to: 'users#edit'
     put 'users/update_image', to: 'users#update_image'
+    get 'users/get_users', to: 'users#get_users'
     post 'communities/create', to: 'communities#create'
     get 'communities/get_communities', to: 'communities#get_communities'
     get 'communities/search_community', to: 'communities#search_community'
@@ -33,5 +35,10 @@ Rails.application.routes.draw do
     delete 'news/delete_news', to: 'news#delete_news'
     post 'favorites/create', to: 'favorites#create'
     get 'favorites/get_newsFavorites', to: 'favorites#get_newsFavorites'
+    post 'comments/create', to: 'comments#create'
+    delete 'comments/delete_comments', to: 'comments#delete_comments'
+    get 'comments/get_comments', to: 'comments#get_comments'
+    put 'events/approve', to: 'events#approve'
+    delete 'events/delete', to: 'events#delete'
   end
 end
