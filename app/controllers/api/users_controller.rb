@@ -89,7 +89,7 @@ module Api
 
         end
         
-        render json: { status: 'SUCCESS', message: 'Usuarios obtenidos', news: usuarios}, status: :ok
+        render json: { status: 'SUCCESS', message: 'Usuarios obtenidos', usuarios: usuarios}, status: :ok
       end
 
       private
