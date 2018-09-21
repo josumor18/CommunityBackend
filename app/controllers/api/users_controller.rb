@@ -77,6 +77,21 @@ module Api
         end
       end
 
+      def get_users
+        com = CommunityMember.where(id_community: params[:id_community]).first
+        
+        usuarios = []
+        users = User.all
+        users.each do |item|
+          if(com.id_user == item.id)
+            usuarios.push(item)
+          end
+
+        end
+        
+        render json: { status: 'SUCCESS', message: 'Usuarios obtenidos', news: usuarios}, status: :ok
+      end
+
       private
       def user_params
         params.permit(:name, :email, :password, :tel, :cel, :address)

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     post 'users/register', to: 'users#register'
     put 'users/edit', to: 'users#edit'
     put 'users/update_image', to: 'users#update_image'
+    get 'users/get_users', to: 'users#get_users'
     post 'communities/create', to: 'communities#create'
     get 'communities/get_communities', to: 'communities#get_communities'
     get 'communities/search_community', to: 'communities#search_community'
