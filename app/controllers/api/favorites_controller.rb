@@ -62,10 +62,10 @@ module Api
       if (user && user.auth_token == pass)
 
         #---------- Cambiar authentication token ----------
-        user.auth_token = nil
-        o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-        user.auth_token = (0...20).map { o[rand(o.length)] }.join
-        user.save
+        #user.auth_token = nil
+        #o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+        #user.auth_token = (0...20).map { o[rand(o.length)] }.join
+        #user.save
         #--------------------------------------------------
         dest = Favorite.where(id_news: params[:idNews]).where(id_user: params[:idUser]).first
         if (dest)   
