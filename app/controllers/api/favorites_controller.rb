@@ -57,7 +57,6 @@ module Api
 
 
     def delete_Favorites
-      fav = Favorite.where(id: params[:id]).first
       pass = params[:auth_token]
       if (user && user.auth_token == pass)
 
@@ -67,9 +66,9 @@ module Api
         user.auth_token = (0...20).map { o[rand(o.length)] }.join
         user.save
         #--------------------------------------------------
-        dest = Favorite.where(id: params[:id]).first
+        dest = Favorite.where(id_news: params[:idNews]).where(id_user: params[:idUser]).first
         if (dest)   
-          Favorite.where(id: params[:id]).destroy_all
+          Favorite.where(id_news: params[:idNews]).where(id_user: params[:idUser]).destroy_all
           render json: { status: 'SUCCESS', auth_token: user.auth_token, message: 'ELIMINACION EXITOSA'}, status: :ok
         else
           render json: { status: 'INVALID', auth_token: user.auth_token, message: 'NO ENCONTRADA'}, status: :unauthorized
