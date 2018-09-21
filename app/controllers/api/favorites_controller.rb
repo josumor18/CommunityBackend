@@ -67,9 +67,9 @@ module Api
         user.auth_token = (0...20).map { o[rand(o.length)] }.join
         user.save
         #--------------------------------------------------
-        dest = Favorite.where(id: params[:id]).destroy_all
-        if (dest)
-          Favorite.where(id: params[:id]).destroy_all      
+        dest = Favorite.where(id: params[:id]).first
+        if (dest)   
+          Favorite.where(id: params[:id]).destroy_all
           render json: { status: 'SUCCESS', auth_token: user.auth_token, message: 'ELIMINACION EXITOSA'}, status: :ok
         else
           render json: { status: 'INVALID', auth_token: user.auth_token, message: 'NO ENCONTRADA'}, status: :unauthorized
