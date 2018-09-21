@@ -69,11 +69,7 @@ module Api
         #--------------------------------------------------
 
         if (n)
-          
-          Favorite.where(id: params[:id]).destroy_all
-          
-
-
+          Favorite.where(id: params[:id]).destroy_all      
           render json: { status: 'SUCCESS', auth_token: user.auth_token, message: 'ELIMINACION EXITOSA'}, status: :ok
         else
           render json: { status: 'INVALID', auth_token: user.auth_token, message: 'NO ENCONTRADA'}, status: :unauthorized
