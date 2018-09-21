@@ -66,7 +66,7 @@ module Api
                 communities.each do |comm|
                     ev = Event.where(id_community: comm.id_community)
                     ev.each do |e|
-                        if(e.approved == true || comm.isAdmin == true)
+                        if(e.approved == true)
                             events.push(e)
                         end
                     end
