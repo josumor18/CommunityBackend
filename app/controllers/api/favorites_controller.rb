@@ -57,6 +57,7 @@ module Api
 
 
     def delete_Favorites
+      user = User.where(id: params[:idUser]).first
       pass = params[:auth_token]
       if (user && user.auth_token == pass)
 
