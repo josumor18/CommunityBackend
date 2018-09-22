@@ -5,7 +5,7 @@ module Api
       def create
         pass = params[:auth_token]
         if (user && user.auth_token == pass)  
-          post = New.new(id_user: params[:id_user], id_news: params[:id_news])
+          fav = Favorite.new(id_user: params[:idUser], id_news: params[:idNews])
 
           #---------- Cambiar authentication token ----------
           user.auth_token = nil
@@ -13,7 +13,7 @@ module Api
           user.auth_token = (0...20).map { o[rand(o.length)] }.join
           user.save
           #--------------------------------------------------
-          if (post.save)
+          if (fav.save)
 
             render json: { status: 'SUCCESS', auth_token: user.auth_token, message: 'Difusion agregada a favoritos '}, status: :created
           else
