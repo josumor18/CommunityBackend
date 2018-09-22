@@ -4,6 +4,7 @@ module Api
 
       def create
         pass = params[:auth_token]
+        user = User.where(id: params[:idUser]).first
         if (user && user.auth_token == pass)  
           fav = Favorite.new(id_user: params[:idUser], id_news: params[:idNews])
 
