@@ -81,6 +81,40 @@ module Api
       end
     end
 
+    def getListUsersCommunity_FavoriteNews
+      user = User.where(id: params[:idUser]).first
+      pass = params[:auth_token]
+      if (user && user.auth_token == pass)
+
+        #---------- Cambiar authentication token ----------
+        user.auth_token = nil
+        o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+        user.auth_token = (0...20).map { o[rand(o.length)] }.join
+        user.save
+        #--------------------------------------------------
+
+        newsFound = New.where(id: params[:idNews]).first
+        idCommunityFound = newsFound.idCommunity
+
+        com = CommunityMember.where(id_community: idCommunityFound)
+        
+        usuarios = []
+        users = User.all
+        com.each do |item1|
+          users.each do |item|
+            if(item1.id_user == item.id)
+              usuarios.push(item)
+            end
+
+          end
+        end
+        
+        render json: { status: 'SUCCESS', message: 'Usuarios obtenidos', usuarios: usuarios, auth_token: user.auth_token}, status: :ok     
+
+      else
+        render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+      end
+    end
         
 
     end
