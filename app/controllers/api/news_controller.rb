@@ -78,7 +78,8 @@ module Api
       if (n)
         
         New.where(id: params[:id]).destroy_all
-        
+        Favorite.where(id_news: params[:id]).destroy_all
+
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
         render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
