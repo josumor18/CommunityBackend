@@ -41,5 +41,6 @@ Rails.application.routes.draw do
     get 'comments/get_comments', to: 'comments#get_comments'
     put 'events/approve', to: 'events#approve'
     delete 'events/delete', to: 'events#delete'
+    get "favorites/getListUsersCommunity_FavoriteNews", to: "favorites#getListUsersCommunity_FavoriteNews"
   end
 end
