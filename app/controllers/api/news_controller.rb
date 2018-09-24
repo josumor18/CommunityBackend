@@ -76,6 +76,17 @@ module Api
       if (n)
         
         New.where(id: params[:id]).destroy_all
+
+        comments = Comment.where(id_news: params[:id])
+        comments.each do |item|
+          r = Report.where(id_comment: item.id).first
+          if(r)
+            Report.where(id_comment: item.id).destroy_all
+          end
+
+        end
+
+        comments.destroy_all
         
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
