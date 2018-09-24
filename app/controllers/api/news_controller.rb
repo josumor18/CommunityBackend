@@ -55,8 +55,8 @@ module Api
         end
 
       end
-      
-      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
+      favs = Favorite.where(id_user: params[:idUser])
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones, favorites: favs}, status: :ok
 
     end
 
