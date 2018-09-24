@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reports
   resources :comments
   resources :favorites
   resources :events
@@ -40,5 +41,6 @@ Rails.application.routes.draw do
     get 'comments/get_comments', to: 'comments#get_comments'
     put 'events/approve', to: 'events#approve'
     delete 'events/delete', to: 'events#delete'
+    post 'reports/create', to: 'reports#create'
   end
 end
