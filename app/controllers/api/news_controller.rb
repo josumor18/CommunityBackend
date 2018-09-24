@@ -38,8 +38,10 @@ module Api
         end
 
       end
+
+      favs = Favorite.where(id_user: params[:idUser])
       
-      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones, favorites: favs}, status: :ok
     end
 
     def get_news_status
@@ -53,8 +55,8 @@ module Api
         end
 
       end
-      
-      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones}, status: :ok
+      favs = Favorite.where(id_user: params[:idUser])
+      render json: { status: 'SUCCESS', message: 'Difusiones obtenidas', news: publicaciones, favorites: favs}, status: :ok
 
     end
 
@@ -76,7 +78,8 @@ module Api
       if (n)
         
         New.where(id: params[:id]).destroy_all
-        
+        Favorite.where(id_news: params[:id]).destroy_all
+
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
         render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized

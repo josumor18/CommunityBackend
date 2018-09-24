@@ -118,7 +118,7 @@ module Api
             token = params[:auth_token]
             if(user.auth_token == token)
                 e = Event.where(id: params[:id_event]).first
-                if (n)
+                if (e)
                     
                     Event.where(id: params[:id_event]).destroy_all
                     

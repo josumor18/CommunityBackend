@@ -36,11 +36,13 @@ Rails.application.routes.draw do
     delete 'news/delete_news', to: 'news#delete_news'
     post 'favorites/create', to: 'favorites#create'
     get 'favorites/get_newsFavorites', to: 'favorites#get_newsFavorites'
+    delete 'favorites/delete_Favorites', to: 'favorites#delete_Favorites'
     post 'comments/create', to: 'comments#create'
     delete 'comments/delete_comments', to: 'comments#delete_comments'
     get 'comments/get_comments', to: 'comments#get_comments'
     put 'events/approve', to: 'events#approve'
     delete 'events/delete', to: 'events#delete'
     post 'reports/create', to: 'reports#create'
+    get 'favorites/getListUsersCommunity_FavoriteNews', to: 'favorites#getListUsersCommunity_FavoriteNews'
   end
 end

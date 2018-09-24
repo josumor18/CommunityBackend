@@ -6,7 +6,8 @@ module Api
       def login
         user = User.where(email: params[:email]).first
         pass = params[:password]
-        if (user && user.password == pass)
+        token = params[:auth_token]
+        if (user && (user.password == pass || user.auth_token == token))
             #---------- Cambiar authentication token ----------
             user.auth_token = nil
             o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
@@ -34,6 +35,12 @@ module Api
         else
             user = User.new(user_params)
             user.isPrivate = false
+            #---------- Cambiar authentication token ----------
+            user.auth_token = nil
+            o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+            user.auth_token = (0...20).map { o[rand(o.length)] }.join
+            #--------------------------------------------------
+
             if user.save
                 render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
             else
