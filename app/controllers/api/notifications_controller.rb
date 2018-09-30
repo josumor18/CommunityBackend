@@ -2,9 +2,9 @@ module Api
     class NotificationsController < ApplicationController
       protect_from_forgery with: :null_session
 
-        /
-        #PUT seen notification 
         #params auth_token, idNotification, idUser
+        #PUT seen notification 
+
         def put_seenNotification
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
@@ -13,19 +13,21 @@ module Api
                 req.update(:seen=>true)
 
 
-                render json: { status: 'SUCCESS', message: 'Notificacion actualizadas' }, status: :ok
+                render json: { status: 'SUCCESS', message: 'Notificacion actualizada' }, status: :ok
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
 
-        #GET notifications by user
         #params auth_token, idUSer
+        #GET notifications by user
+        
+
         def get_newsNotifications
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
             if (user && user.auth_token == token)
-              Notifs = Notification.where(idUSer: params[:idUser])
+              notifs = Notification.where(idUSer: params[:idUser])
    
               #---------- Change authentication token ----------
               user.auth_token = nil
@@ -34,14 +36,15 @@ module Api
               user.save
               #--------------------------------------------------
       
-              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token notifications: Notifs}, status: :ok
+              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token notifications: notifs}, status: :ok
             else
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
 
-        #DELETE notifications by id
         #params auth_token, idUser, idNotification 
+        #DELETE notifications by id
+        
         def delete_Notification
             user = User.where(id: params[:idUser]).first
             pass = params[:auth_token]
@@ -59,6 +62,6 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-        /
+        
     end
 end
