@@ -48,14 +48,13 @@ module Api
             if (user && user.auth_token == pass)
       
 
-              dest = Notification.where(id: params[:idNotification]).first
-              if (dest)   
-                Notification.where(id: params[:idNotification]).destroy_all
-                render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
-              else
-                render json: { status: 'INVALID', message: 'NOTIFICACION NO ENCONTRADA'}, status: :unauthorized
-                
-              end
+                dest = Notification.where(id: params[:idNotification]).first
+                if (dest)   
+                    Notification.where(id: params[:idNotification]).destroy_all
+                    render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
+                else
+                    render json: { status: 'INVALID', message: 'NOTIFICACION NO ENCONTRADA'}, status: :unauthorized
+                end
             else
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
