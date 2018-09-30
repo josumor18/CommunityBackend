@@ -18,7 +18,7 @@ module Api
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-        /
+        
         #params auth_token, idUSer
         #GET notifications by user
         
@@ -27,7 +27,7 @@ module Api
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
             if (user && user.auth_token == token)
-              notifs = Notification.where(idUSer: params[:idUser])
+              notifs = Notification.where(idUser: params[:idUser])
    
               #---------- Change authentication token ----------
               user.auth_token = nil
@@ -41,8 +41,8 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-        /
-        /
+        
+        
         #params auth_token, idUser, idNotification 
         #DELETE notifications by id
         
@@ -63,7 +63,7 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-        /
+        
         
     end
 end
