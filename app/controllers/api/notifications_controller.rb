@@ -36,7 +36,7 @@ module Api
               user.save
               #--------------------------------------------------
       
-              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token notifications: notifs}, status: :ok
+              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token, notifications: notifs}, status: :ok
             else
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
