@@ -7,7 +7,16 @@ module Api
           post = New.new(idCommunity: params[:idCommunity], title: params[:title], description: params[:description], date: params[:date], photo: params[:photo], approved: params[:approved])
           if (post.save)
             
-            #amigos = Amigo.where(id_user1: user.id)
+            #notifications
+            isApproved = params[:approved]
+            if(isApproved)
+              members = CommunityMember.where(id_community: params[idCommunity])
+              members.each do |item|
+                Notification.new(idUser: item.id_user, idContent: post.id, created_at: params[:date], isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false)
+              end
+            end
+
+            #amigos = Amigo.where(id_user1:  = user.id)
 
             #amigos.each do |amigo|
               #notif = Notification.new(id_user: amigo.id_user2, id_friend: user.id, id_post: post.id, visto: false)
