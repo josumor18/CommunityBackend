@@ -18,7 +18,7 @@ module Api
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-
+        /
         #params auth_token, idUSer
         #GET notifications by user
         
@@ -41,7 +41,8 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-
+        /
+        /
         #params auth_token, idUser, idNotification 
         #DELETE notifications by id
         
@@ -62,6 +63,7 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
+        /
         
     end
 end
