@@ -41,7 +41,7 @@ module Api
         end
 
         #DELETE notifications by id
-        #params auth_token, idUser, idNotification
+        #params auth_token, idUser, idNotification 
         def delete_Notification
             user = User.where(id: params[:idUser]).first
             pass = params[:auth_token]
