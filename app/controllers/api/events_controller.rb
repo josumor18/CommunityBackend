@@ -16,6 +16,17 @@ module Api
                     user.auth_token = (0...20).map { o[rand(o.length)] }.join
                     user.save
                     #--------------------------------------------------
+
+                    #notifications
+                    isApproved = params[:approved]
+                    if(isApproved)
+                        members = CommunityMember.where(id_community: params[idCommunity])
+                        members.each do |item|
+                            Notification.new(idUser: item.id_user, idContent: eve.id, isNews: false, isReports: false, isEvents: true, titleContent:  params[:title], seen: false, photo: params[:photo])
+                        end
+                    end
+
+
                     render json: { status: 'SUCCESS', message: 'Evento creado', auth_token: user.auth_token }, status: :created
                 else
                     render json: { status: 'INVALID', message: 'Error al crear comunidad'}, status: :unauthorized
@@ -106,6 +117,16 @@ module Api
                 user.save
                 #--------------------------------------------------
                 
+
+                #notifications
+                idCom = event.id_community
+                members = CommunityMember.where(id_community: idCom)
+                members.each do |item|
+                    Notification.new(idUser: item.id_user, idContent: event.id, isNews: false, isReports: false, isEvents: true, titleContent:  event.title, seen: false, photo: event.photo)
+                end
+
+
+
                 render json: { status: 'SUCCESS', message: 'Evento actualizado', auth_token: user.auth_token }, status: :ok
 
             else
@@ -121,6 +142,7 @@ module Api
                 if (e)
                     
                     Event.where(id: params[:id_event]).destroy_all
+                    Notification.where(idContent: params[:id_event]).where(isEvents: true).destroy_all
                     
                     render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
                 else
