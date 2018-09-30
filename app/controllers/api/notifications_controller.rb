@@ -2,7 +2,7 @@ module Api
     class NotificationsController < ApplicationController
       protect_from_forgery with: :null_session
 
-        
+        /
         #PUT seen notification 
         #params auth_token, idNotification, idUser
         def put_seenNotification
@@ -59,5 +59,6 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
+        /
     end
 end
