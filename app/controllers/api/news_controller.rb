@@ -74,6 +74,14 @@ module Api
       if (n)
         
         n.update(:approved=>true)
+        #notifications
+        idCom = n.idCommunity
+        members = CommunityMember.where(id_community: idCom)
+        members.each do |item|
+          #FALTAAAAAAAAAAA
+          Notification.new(idUser: item.id_user, idContent: n.id, created_at: params[:date], isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false)
+        end
+
         
         render json: { status: 'SUCCESS', message: 'APROBACION EXITOSA'}, status: :ok
       else
