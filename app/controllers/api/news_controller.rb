@@ -12,7 +12,7 @@ module Api
             if(isApproved)
               members = CommunityMember.where(id_community: params[idCommunity])
               members.each do |item|
-                Notification.new(idUser: item.id_user, idContent: post.id, created_at: params[:date], isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false)
+                Notification.new(idUser: item.id_user, idContent: post.id, isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false, photo: params[:photo])
               end
             end
 
@@ -78,8 +78,7 @@ module Api
         idCom = n.idCommunity
         members = CommunityMember.where(id_community: idCom)
         members.each do |item|
-          #FALTAAAAAAAAAAA
-          Notification.new(idUser: item.id_user, idContent: n.id, created_at: params[:date], isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false)
+          Notification.new(idUser: item.id_user, idContent: n.id, isNews: true, isReports: false, isEvents: false, titleContent:  n.title, seen: false, photo: n.photo)
         end
 
         
@@ -110,7 +109,7 @@ module Api
         
 
         Favorite.where(id_news: params[:id]).destroy_all
-
+        Notification.where(idContent: params[:id]).where(isNews: true).destroy_all
 
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
