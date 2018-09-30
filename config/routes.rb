@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   resources :reports
   resources :comments
   resources :favorites
@@ -44,5 +45,8 @@ Rails.application.routes.draw do
     delete 'events/delete', to: 'events#delete'
     post 'reports/create', to: 'reports#create'
     get 'favorites/getListUsersCommunity_FavoriteNews', to: 'favorites#getListUsersCommunity_FavoriteNews'
+    put 'notifications/put_seenNotification',  to: 'notifications#put_seenNotification'
+    get 'notifications/get_newsNotifications', to: 'notifications#get_newsNotifications'
+    delete 'notifications/delete_Notification', to: 'notifications#delete_Notification'
   end
 end
