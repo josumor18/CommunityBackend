@@ -10,7 +10,7 @@ module Api
             #notifications
             isApproved = params[:approved]
             if(isApproved)
-              members = CommunityMember.where(id_community: params[idCommunity])
+              members = CommunityMember.where(id_community: params[:idCommunity])
               members.each do |item|
                 Notification.new(idUser: item.id_user, idContent: post.id, isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false, photo: params[:photo])
               end

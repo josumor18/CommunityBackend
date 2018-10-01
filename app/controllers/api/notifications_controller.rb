@@ -13,19 +13,20 @@ module Api
                 req.update(:seen=>true)
 
 
-                render json: { status: 'SUCCESS', message: 'Notificacion actualizadas' }, status: :ok
+                render json: { status: 'SUCCESS', message: 'Notificacion actualizada' }, status: :ok
             else
                 render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-
+        
+        
         #GET notifications by user
-        #params auth_token, idUSer
+        #params auth_token, idUser
         def get_newsNotifications
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
             if (user && user.auth_token == token)
-              Notifs = Notification.where(idUSer: params[:idUser])
+              notifs = Notification.where(idUser: params[:idUser])
    
               #---------- Change authentication token ----------
               user.auth_token = nil
@@ -34,12 +35,13 @@ module Api
               user.save
               #--------------------------------------------------
       
-              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token notifications: Notifs}, status: :ok
+              render json: { status: 'SUCCESS', message: 'Notificaciones obtenidas', auth_token: user.auth_token, notifications: notifs}, status: :ok
             else
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
-
+        
+        
         #DELETE notifications by id
         #params auth_token, idUser, idNotification 
         def delete_Notification
@@ -59,5 +61,7 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
+        
+        
     end
 end
