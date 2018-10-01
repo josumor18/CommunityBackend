@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :messages
+  resources :chats
   resources :notifications
   resources :reports
   resources :comments
