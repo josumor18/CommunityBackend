@@ -9,14 +9,14 @@ module Api
             
             #notifications
             isApproved = params[:approved]
-            if(isApproved == true)
-              
-            end
-            members = CommunityMember.all
+            if(isApproved == "true")
+              members = CommunityMember.where(id_community: params[:idCommunity])
               members.each do |item|
                 notif = Notification.new(idUser: item.id_user, idContent: post.id, isNews: true, isReports: false, isEvents: false, titleContent:  params[:title], seen: false, photo: params[:photo])
                 notif.save
               end
+            end
+
             #amigos = Amigo.where(id_user1:  = user.id)
 
             #amigos.each do |amigo|
