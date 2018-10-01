@@ -2,9 +2,9 @@ module Api
     class NotificationsController < ApplicationController
       protect_from_forgery with: :null_session
 
-        #params auth_token, idNotification, idUser
+        
         #PUT seen notification 
-
+        #params auth_token, idNotification, idUser
         def put_seenNotification
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
@@ -19,10 +19,9 @@ module Api
             end
         end
         
-        #params auth_token, idUSer
-        #GET notifications by user
         
-
+        #GET notifications by user
+        #params auth_token, idUser
         def get_newsNotifications
             user = User.where(id: params[:idUser]).first
             token = params[:auth_token]
@@ -43,9 +42,8 @@ module Api
         end
         
         
-        #params auth_token, idUser, idNotification 
         #DELETE notifications by id
-        
+        #params auth_token, idUser, idNotification 
         def delete_Notification
             user = User.where(id: params[:idUser]).first
             pass = params[:auth_token]
