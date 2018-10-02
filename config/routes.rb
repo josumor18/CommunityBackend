@@ -50,5 +50,6 @@ Rails.application.routes.draw do
     put 'notifications/put_seenNotification',  to: 'notifications#put_seenNotification'
     get 'notifications/get_newsNotifications', to: 'notifications#get_newsNotifications'
     delete 'notifications/delete_Notification', to: 'notifications#delete_Notification'
+    get 'news/getSingleNews_by_id', to: 'news#getSingleNews_by_id'
   end
 end
