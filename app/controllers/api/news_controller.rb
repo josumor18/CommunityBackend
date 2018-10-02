@@ -119,7 +119,27 @@ module Api
         
       end
     end
-
+    
+    #GET notifications by user
+    #params auth_token, idUser, idNews
+    def getSingleNews_by_id
+      user = User.where(id: params[:idUser]).first
+      token = params[:auth_token]
+      if (user && user.auth_token == token)
+        n = New.where(id: params[:idNews]).first
+ 
+        #---------- Change authentication token ----------
+        user.auth_token = nil
+        o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+        user.auth_token = (0...20).map { o[rand(o.length)] }.join
+        user.save
+        #--------------------------------------------------
+    
+        render json: { status: 'SUCCESS', message: 'difusión obtenida', auth_token: user.auth_token, news: n}, status: :ok
+      else
+        render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+      end
+    end    
         
 
     end
