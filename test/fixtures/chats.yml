@@ -2,12 +2,8 @@
 
 one:
   id_community: 1
-  id_receiver: 1
-  last_message: MyString
-  visto: false
+  is_group: false
 
 two:
   id_community: 1
-  id_receiver: 1
-  last_message: MyString
-  visto: false
+  is_group: false

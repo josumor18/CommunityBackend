@@ -2,10 +2,12 @@
 
 one:
   id_chat: 1
+  id_user: 1
   message: MyString
-  sent: false
+  seen: false
 
 two:
   id_chat: 1
+  id_user: 1
   message: MyString
-  sent: false
+  seen: false

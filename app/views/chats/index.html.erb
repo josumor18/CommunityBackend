@@ -6,9 +6,7 @@
   <thead>
     <tr>
       <th>Id community</th>
-      <th>Id receiver</th>
-      <th>Last message</th>
-      <th>Visto</th>
+      <th>Is group</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,9 +15,7 @@
     <% @chats.each do |chat| %>
       <tr>
         <td><%= chat.id_community %></td>
-        <td><%= chat.id_receiver %></td>
-        <td><%= chat.last_message %></td>
-        <td><%= chat.visto %></td>
+        <td><%= chat.is_group %></td>
         <td><%= link_to 'Show', chat %></td>
         <td><%= link_to 'Edit', edit_chat_path(chat) %></td>
         <td><%= link_to 'Destroy', chat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
