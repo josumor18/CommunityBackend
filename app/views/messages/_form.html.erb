@@ -17,13 +17,18 @@
   </div>
 
   <div class="field">
+    <%= f.label :id_user %>
+    <%= f.number_field :id_user %>
+  </div>
+
+  <div class="field">
     <%= f.label :message %>
     <%= f.text_field :message %>
   </div>
 
   <div class="field">
-    <%= f.label :sent %>
-    <%= f.check_box :sent %>
+    <%= f.label :seen %>
+    <%= f.check_box :seen %>
   </div>
 
   <div class="actions">
