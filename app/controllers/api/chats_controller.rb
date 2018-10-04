@@ -28,6 +28,7 @@ module Api
             end
         end
 
+        #GET get_chats
         def get_chats
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
