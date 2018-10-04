@@ -21,8 +21,10 @@ module Api
         
             members = CommunityMember.where(id_community: idCom)
             members.each do |item|
-              notif = Notification.new(idUser: item.id_user, idContent: news.id, isNews: false, isReports: true, isEvents: false, titleContent:  params[:idComment], seen: false, photo: "")
-              notif.save
+              if(item.isAdmin == true)
+                notif = Notification.new(idUser: item.id_user, idContent: news.id, isNews: false, isReports: true, isEvents: false, titleContent:  params[:idComment], seen: false, photo: "")
+                notif.save
+              end
             end
 
             render json: { status: 'SUCCESS', message: 'Reporte creado'}, status: :created
