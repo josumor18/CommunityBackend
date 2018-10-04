@@ -122,7 +122,7 @@ module Api
       end
     end
     
-    #GET notifications by user
+    #GET news by id
     #params auth_token, idUser, idNews
     def getSingleNews_by_id
       user = User.where(id: params[:idUser]).first
