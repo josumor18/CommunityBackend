@@ -46,7 +46,7 @@ module Api
                     comm_mems = CommunityMember.where(id_community: params[:id_community]).where(isAdmin: false)
 
                     comm_mems.each do |m|
-                        chat_temp = Chat.where(id_community: m.id_community).where(is_group: false).first
+                        chat_temp = Chat.where(id_community: m.id_community).where(id_user: m.id_user).where(is_group: false).first
                         chats.push(chat_temp)
                         last_msg.push(Message.where(id_chat: chat_temp.id).last)
                     end
