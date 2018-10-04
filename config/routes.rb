@@ -52,5 +52,7 @@ Rails.application.routes.draw do
     delete 'notifications/delete_Notification', to: 'notifications#delete_Notification'
     get 'news/getSingleNews_by_id', to: 'news#getSingleNews_by_id'
     get 'events/getSingleEvent_by_id', to: 'events#getSingleEvent_by_id'
+    post 'chats/send_message', to: 'chats#send_message'
+    get 'chats/get_chats', to: 'chats#get_chats'
   end
 end
