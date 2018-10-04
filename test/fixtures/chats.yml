@@ -2,8 +2,10 @@
 
 one:
   id_community: 1
+  id_user: 1
   is_group: false
 
 two:
   id_community: 1
+  id_user: 1
   is_group: false

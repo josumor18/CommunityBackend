@@ -17,7 +17,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create chat" do
     assert_difference('Chat.count') do
-      post chats_url, params: { chat: { id_community: @chat.id_community, is_group: @chat.is_group } }
+      post chats_url, params: { chat: { id_community: @chat.id_community, id_user: @chat.id_user, is_group: @chat.is_group } }
     end
 
     assert_redirected_to chat_url(Chat.last)
@@ -34,7 +34,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update chat" do
-    patch chat_url(@chat), params: { chat: { id_community: @chat.id_community, is_group: @chat.is_group } }
+    patch chat_url(@chat), params: { chat: { id_community: @chat.id_community, id_user: @chat.id_user, is_group: @chat.is_group } }
     assert_redirected_to chat_url(@chat)
   end
 

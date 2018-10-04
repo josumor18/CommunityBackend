@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Id community</th>
+      <th>Id user</th>
       <th>Is group</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +16,7 @@
     <% @chats.each do |chat| %>
       <tr>
         <td><%= chat.id_community %></td>
+        <td><%= chat.id_user %></td>
         <td><%= chat.is_group %></td>
         <td><%= link_to 'Show', chat %></td>
         <td><%= link_to 'Edit', edit_chat_path(chat) %></td>
