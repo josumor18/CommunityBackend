@@ -47,6 +47,7 @@ module Api
                 if(mem.save)
                     Request.where(id_community: params[:id_community]).where(id_user: params[:id_user]).destroy_all
 
+                    Chat.new(id_community: params[:id_community], id_user: user.id, is_group: false).save
                     #---------- Cambiar authentication token ----------
                     user.auth_token = nil
                     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
