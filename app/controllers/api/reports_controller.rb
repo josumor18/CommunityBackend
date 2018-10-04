@@ -18,11 +18,11 @@ module Api
             comment = Comment.where(id: params[:idComment]).first
             news = New.where(id: comment.id_news).first
             idCom = news.idCommunity
-        
+            
             members = CommunityMember.where(id_community: idCom)
             members.each do |item|
               if(item.isAdmin == true)
-                notif = Notification.new(idUser: item.id_user, idContent: news.id, isNews: false, isReports: true, isEvents: false, titleContent:  params[:idComment], seen: false, photo: "")
+                notif = Notification.new(idUser: item.id_user, idContent: news.id, isNews: false, isReports: true, isEvents: false, titleContent:  news.title, seen: false, photo: "")
                 notif.save
               end
             end

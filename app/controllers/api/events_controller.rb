@@ -161,9 +161,34 @@ module Api
         end
 
 
+
+        #GET Event by id
+        #params auth_token, idUser, idEvent
+        def getSingleEvent_by_id
+            user = User.where(id: params[:idUser]).first
+            token = params[:auth_token]
+            if (user && user.auth_token == token)
+            e = Event.where(id: params[:idEvent]).first
+            comm = Community.where(id: e.id_community).first
+            #---------- Change authentication token ----------
+            user.auth_token = nil
+            o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+            user.auth_token = (0...20).map { o[rand(o.length)] }.join
+            user.save
+            #--------------------------------------------------
+        
+            render json: { status: 'SUCCESS', message: 'difusión obtenida', auth_token: user.auth_token, event: e, nameCommunity: comm.name}, status: :ok
+            else
+            render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end    
+
+
         private
         def event_params
             params.permit(:id_community, :title, :description, :dateEvent, :start, :end, :photo, :approved)
         end
+
+
     end
 end
