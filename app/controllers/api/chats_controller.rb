@@ -51,7 +51,7 @@ module Api
                         last_msg.push(Message.where(id_chat: chat_temp.id).last)
                     end
                 else
-                    chat_temp = Chat.where(id_community: m.id_community).where(is_group: false).where(id_user: user.id).first
+                    chat_temp = Chat.where(id_community: params[:id_community]).where(is_group: false).where(id_user: user.id).first
                     chats.push(chat_temp)
                     last_msg.push(Message.where(id_chat: chat_temp.id).last)
                 end
