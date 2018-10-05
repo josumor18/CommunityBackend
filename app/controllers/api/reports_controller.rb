@@ -22,7 +22,7 @@ module Api
             members = CommunityMember.where(id_community: idCom)
             members.each do |item|
               if(item.isAdmin == true)
-                notif = Notification.new(idUser: item.id_user, idContent: news.id, isNews: false, isReports: true, isEvents: false, titleContent:  news.title, seen: false, photo: "")
+                notif = Notification.new(idUser: item.id_user, idContent: report.id, isNews: false, isReports: true, isEvents: false, titleContent:  news.title, seen: false, photo: "")
                 notif.save
               end
             end
