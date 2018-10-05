@@ -36,7 +36,15 @@ module Api
       if (c)
         
         Comment.where(id: params[:id]).destroy_all
-        
+        reps = Report.where(id_comment: params[:id])
+        reps.each do |item|
+          Notification.where(idContent: item.id).where(isReports: true).destroy_all
+        end
+
+        Report.where(id_comment: params[:id]).destroy_all
+
+
+
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
         render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
