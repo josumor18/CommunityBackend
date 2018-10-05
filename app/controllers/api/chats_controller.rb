@@ -57,12 +57,61 @@ module Api
                 end
 
                 #---------- Cambiar authentication token ----------
+                #user.auth_token = nil
+                #o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                #user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                #user.save
+                #--------------------------------------------------
+                #render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg, auth_token:user.auth_token}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg}, status: :ok
+            else
+                render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
+            end
+        end
+
+        #GET get_messages
+        def get_messages
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if (user && user.auth_token==token)
+                messages_list = Message.where(id_chat: params[:id_chat]).order('created_at ASC')
+
+                last_id = params[:last_id]
+                mess_list = []
+
+                if(last_id == -1)
+                    messages_list.each do |mess|
+                        if(mess.id_user != user.id)
+                            mess.update(seen=>true)
+                        end
+                    end
+
+                    mess_list = messages_list
+                else
+                    last_id_passed = false
+                    messages_list.each do |mess|
+                        if(last_id_passed)
+                            if(mess.id_user != user.id)
+                                mess.update(seen=>true)
+                                mess_list.push(mess)
+                            end
+                        else
+                            if(mess.id == last_id_passed)
+                                last_id_passed = true
+                            end
+                        end
+                        
+                    end
+                end
+                
+
+                #---------- Cambiar authentication token ----------
                 user.auth_token = nil
                 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
                 user.save
                 #--------------------------------------------------
-                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg, auth_token:user.auth_token}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list: mess_list, auth_token:user.auth_token}, status: :ok
             else
                 render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
             end
