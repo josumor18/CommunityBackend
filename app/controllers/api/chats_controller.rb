@@ -13,12 +13,13 @@ module Api
                     mess = Message.new(id_chat: id_chat, id_user: user.id, message: params[:message], seen: false)
                     if(mess.save)
                         #---------- Cambiar authentication token ----------
-                        user.auth_token = nil
-                        o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-                        user.auth_token = (0...20).map { o[rand(o.length)] }.join
-                        user.save
+                        #user.auth_token = nil
+                        #o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                        #user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                        #user.save
                         #--------------------------------------------------
-                        render json: { status: 'SUCCESS', message: 'MENSAJE ENVIADO', auth_token:user.auth_token}, status: :ok
+                        #render json: { status: 'SUCCESS', message: 'MENSAJE ENVIADO', auth_token:user.auth_token}, status: :ok
+                        render json: { status: 'SUCCESS', message: 'MENSAJE ENVIADO'}, status: :ok
                     else
                         render json: { status: 'ERROR', message: 'Mensaje no enviado'}, status: :unauthorized
                     end
@@ -57,13 +58,12 @@ module Api
                 end
 
                 #---------- Cambiar authentication token ----------
-                #user.auth_token = nil
-                #o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-                #user.auth_token = (0...20).map { o[rand(o.length)] }.join
-                #user.save
+                user.auth_token = nil
+                o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                user.save
                 #--------------------------------------------------
-                #render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg, auth_token:user.auth_token}, status: :ok
-                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', chats: chats, last_msg: last_msg, auth_token:user.auth_token}, status: :ok
             else
                 render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
             end
