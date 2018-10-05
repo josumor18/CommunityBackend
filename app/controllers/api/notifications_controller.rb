@@ -61,6 +61,35 @@ module Api
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
         end
+
+        #GET report and comment bi idReport
+        #params auth_token, idUser, idReport
+        def getReportAndComment
+            user = User.where(id: params[:idUser]).first
+            token = params[:auth_token]
+            if (user && user.auth_token == token)
+   
+              #---------- Change authentication token ----------
+              user.auth_token = nil
+              o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+              user.auth_token = (0...20).map { o[rand(o.length)] }.join
+              user.save
+              #--------------------------------------------------
+
+              r = Report.where(id: params[:idReport]).first      #return
+              c = Comment.where(id: r.id_comment).first          #return
+              news = New.where(id: c,id_news).first
+              tNews = news.title                             #return
+              community = Community.where(id: news.idCommunity).first
+              nCommunity = community.name
+
+
+      
+              render json: { status: 'SUCCESS', message: 'Reporte obtenido', auth_token: user.auth_token, report: r, comment: c, titleNews: tNews, nameCommunity: nCommunity}, status: :ok
+            else
+              render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+            end
+        end
           
     end
 end
