@@ -78,14 +78,17 @@ module Api
 
               r = Report.where(id: params[:idReport]).first      #return
               c = Comment.where(id: r.id_comment).first          #return
-              news = New.where(id: c,id_news).first
+              news = New.where(id: c.id_news).first
               tNews = news.title                             #return
               community = Community.where(id: news.idCommunity).first
               nCommunity = community.name
+              usr = User.where(id: c.id_user).first
+              nUser = usr.name
+
 
 
       
-              render json: { status: 'SUCCESS', message: 'Reporte obtenido', auth_token: user.auth_token, report: r, comment: c, titleNews: tNews, nameCommunity: nCommunity}, status: :ok
+              render json: { status: 'SUCCESS', message: 'Reporte obtenido', auth_token: user.auth_token, report: r, comment: c, titleNews: tNews, nameCommunity: nCommunity, nameUser: nUser}, status: :ok
             else
               render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
             end
