@@ -106,7 +106,7 @@ module Api
       n = New.where(id: params[:id]).first
       if (n)
         
-        New.where(id: params[:id]).destroy_all
+        
 
 
         comments = Comment.where(id_news: params[:id])
@@ -123,7 +123,7 @@ module Api
 
         Favorite.where(id_news: params[:id]).destroy_all
         Notification.where(idContent: params[:id]).where(isNews: true).destroy_all
-
+        New.where(id: params[:id]).destroy_all
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
         render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
