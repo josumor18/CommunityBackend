@@ -27,6 +27,15 @@ module Api
                                 notif.save
                             end
                         end
+                    else
+                        members = CommunityMember.where(id_community: params[:id_community])
+                        members.each do |item|
+                            if(user.id != item.id_user)
+                                if(item.isAdmin == true)
+                                notif = Notification.new(idUser: item.id_user, idContent: eve.id, isNews: false, isReports: false, isEvents: true, titleContent:  params[:title], seen: false, photo: params[:photo])
+                                notif.save
+                            end
+                        end
                     end
 
 
