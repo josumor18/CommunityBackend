@@ -43,22 +43,14 @@ module Api
         
         
         #DELETE notifications by id
-        #params auth_token, idUser, idNotification 
+        #params idNotification 
         def delete_Notification
-            user = User.where(id: params[:idUser]).first
-            pass = params[:auth_token]
-            if (user && user.auth_token == pass)
-      
-
-                dest = Notification.where(id: params[:idNotification]).first
-                if (dest)   
-                    Notification.where(id: params[:idNotification]).destroy_all
-                    render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
-                else
-                    render json: { status: 'INVALID', message: 'NOTIFICACION NO ENCONTRADA'}, status: :unauthorized
-                end
+            dest = Notification.where(id: params[:idNotification]).first
+            if (dest)   
+                Notification.where(id: params[:idNotification]).destroy_all
+                render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
             else
-              render json: { status: 'INVALID', message: 'Token invalido'}, status: :unauthorized
+                render json: { status: 'INVALID', message: 'NOTIFICACION NO ENCONTRADA'}, status: :unauthorized
             end
         end
 
