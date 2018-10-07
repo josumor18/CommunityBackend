@@ -118,7 +118,7 @@ module Api
 
         end
 
-        comments.destroy_all
+        Comment.where(id_news: params[:id]).destroy_all
         
 
         Favorite.where(id_news: params[:id]).destroy_all
