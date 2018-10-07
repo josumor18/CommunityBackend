@@ -118,11 +118,19 @@ module Api
 
         end
 
-        Comment.where(id_news: params[:id]).destroy_all
+        c = Comment.where(id_news: params[:id]).first
+        if (c)
+          Comment.where(id_news: params[:id]).destroy_all
+        end
+        f = Favorite.where(id_news: params[:id]).first
+        if (f)
+          Favorite.where(id_news: params[:id]).destroy_all
+        end
+        no = Notification.where(idContent: params[:id]).where(isNews: true).first
+        if (no)
+          Notification.where(idContent: params[:id]).where(isNews: true).destroy_all
+        end
         
-
-        Favorite.where(id_news: params[:id]).destroy_all
-        Notification.where(idContent: params[:id]).where(isNews: true).destroy_all
         New.where(id: params[:id]).destroy_all
         render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
       else
