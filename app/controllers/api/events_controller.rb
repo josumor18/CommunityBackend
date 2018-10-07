@@ -156,7 +156,10 @@ module Api
             if(user.auth_token == token)
                 e = Event.where(id: params[:id_event]).first
                 if (e)
-                    Notification.where(idContent: params[:id_event]).where(isEvents: true).destroy_all
+                    n = Notification.where(idContent: params[:id_event]).where(isEvents: true).first
+                    if (n)
+                        Notification.where(idContent: params[:id_event]).where(isEvents: true).destroy_all
+                    end
                     Event.where(id: params[:id_event]).destroy_all
                     render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
                 else
