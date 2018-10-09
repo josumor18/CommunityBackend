@@ -82,7 +82,8 @@ module Api
                 if(last_id == -1)
                     messages_list.each do |mess|
                         if(mess.id_user != user.id)
-                            mess.update(seen=>true)
+                            m = Message.where(id: mess.id).first
+                            m.update(seen=>true)
                         end
                         mess_list.push(mess)
                     end
@@ -91,7 +92,8 @@ module Api
                     messages_list.each do |mess|
                         if(last_id_passed)
                             if(mess.id_user != user.id)
-                                mess.update(seen=>true)
+                                m = Message.where(id: mess.id).first
+                                m.update(seen=>true)
                             end
                             mess_list.push(mess)
                         else
