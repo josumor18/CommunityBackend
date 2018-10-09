@@ -83,8 +83,8 @@ module Api
                     messages_list.each do |mess|
                         if(mess.id_user != user.id)
                             mess.update(seen=>true)
-                            mess_list.push(mess)
                         end
+                        mess_list.push(mess)
                     end
                 else
                     last_id_passed = false
@@ -92,8 +92,8 @@ module Api
                         if(last_id_passed)
                             if(mess.id_user != user.id)
                                 mess.update(seen=>true)
-                                mess_list.push(mess)
                             end
+                            mess_list.push(mess)
                         else
                             if(mess.id == last_id_passed)
                                 last_id_passed = true
@@ -110,7 +110,7 @@ module Api
                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
                 user.save
                 #--------------------------------------------------
-                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list: mess_list, auth_token:user.auth_token}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list: messages_list, auth_token:user.auth_token}, status: :ok
             else
                 render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
             end
