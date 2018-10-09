@@ -76,7 +76,7 @@ module Api
             if (user && user.auth_token==token)
                 messages_list = Message.where(id_chat: params[:id_chat]).order('created_at ASC')
 
-                last_id = params[:last_id]
+                last_id = params[:last_id].to_i
                 mess_list = []
 
                 if(last_id == -1)
@@ -111,7 +111,7 @@ module Api
                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
                 user.save
                 #--------------------------------------------------
-                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list:messages_list, last_id:last_id, auth_token:user.auth_token}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list:mess_list, auth_token:user.auth_token}, status: :ok
             else
                 render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
             end
