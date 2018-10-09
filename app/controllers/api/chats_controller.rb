@@ -111,7 +111,7 @@ module Api
                 user.auth_token = (0...20).map { o[rand(o.length)] }.join
                 user.save
                 #--------------------------------------------------
-                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list:messages_list, auth_token:user.auth_token}, status: :ok
+                render json: { status: 'SUCCESS', message: 'Mensajes Obtenidos', messages_list:messages_list, last_id:last_id, auth_token:user.auth_token}, status: :ok
             else
                 render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
             end
