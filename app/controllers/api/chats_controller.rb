@@ -80,7 +80,6 @@ module Api
                 mess_list = []
 
                 if(last_id == -1)
-                    messages_list = []
                     messages_list.each do |mess|
                         if(mess.id_user != user.id)
                             mess.update(seen=>true)
