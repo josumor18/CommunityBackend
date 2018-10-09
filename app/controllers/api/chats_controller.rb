@@ -83,10 +83,9 @@ module Api
                     messages_list.each do |mess|
                         if(mess.id_user != user.id)
                             mess.update(seen=>true)
+                            mess_list.push(mess)
                         end
                     end
-
-                    mess_list = messages_list
                 else
                     last_id_passed = false
                     messages_list.each do |mess|
