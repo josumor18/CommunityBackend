@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     get 'chats/get_chats', to: 'chats#get_chats'
     get 'chats/get_messages', to: 'chats#get_messages'
     get 'notifications/getReportAndComment', to: 'notifications#getReportAndComment'
+    delete 'community_members/delete', to: 'community_members#delete'
 
   end
 end
