@@ -100,7 +100,7 @@ module Api
                             end
                             mess_list.push(mess)
                         else
-                            if(mess.id == last_id_passed)
+                            if(mess.id == last_id)
                                 last_id_passed = true
                             end
                         end
