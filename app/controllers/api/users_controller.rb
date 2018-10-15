@@ -14,7 +14,7 @@ module Api
             dev_tok.update(:token=>device_token)
 
             pN = PushNotification.new
-            pN.createNotification
+            pN.createNotification([device_token])
             #pN.printSomething
           end
             #---------- Cambiar authentication token ----------
