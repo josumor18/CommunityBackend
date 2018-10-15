@@ -15,7 +15,13 @@ module Api
                     notification: {
                         title: "Message Title", 
                         body: "Hi, Worked perfectly",
-                        icon: "myicon"}
+                        icon: "myicon"
+                    },
+                    data: {
+                        tipo: 231,
+                        message: "Este es mi mensaje para tí",
+                        titulo: "Titulito"
+                    }
                     }
 
             response = fcm.send(registration_ids, options)
