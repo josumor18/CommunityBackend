@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     post 'users/login', to: 'users#login'
     post 'users/register', to: 'users#register'
+    put 'users/logout', to: 'users#logout'
     put 'users/edit', to: 'users#edit'
     put 'users/update_image', to: 'users#update_image'
     get 'users/get_users', to: 'users#get_users'

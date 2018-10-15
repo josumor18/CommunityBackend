@@ -55,6 +55,18 @@ module Api
         end
       end
 
+      #PUT
+      def logout
+        user = User.where(id: params[:id]).first
+        token = params[:auth_token]
+
+        if (user && user.auth_token==token)
+          dev_tok = DeviceToken.where(id_user: user.id).first
+          dev_tok.update(:token=>"")
+        end
+      end
+
+      #PUT
       def edit
         user = User.where(id: params[:id]).first
         token = params[:auth_token]
