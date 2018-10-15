@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003204652) do
+ActiveRecord::Schema.define(version: 20181015055339) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "id_community"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(version: 20181003204652) do
     t.boolean  "isAdmin"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "device_tokens", force: :cascade do |t|
+    t.integer  "id_user"
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
