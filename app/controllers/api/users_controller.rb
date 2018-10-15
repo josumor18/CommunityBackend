@@ -9,8 +9,10 @@ module Api
         token = params[:auth_token]
         device_token = params[:device_token]
         if (user && (user.password == pass || user.auth_token == token))
-          dev_tok = DeviceToken.where(id_usuario: user.id).first
-          dev_tok.update(:token=>device_token)
+          dev_tok = DeviceToken.where(id_user: user.id).first
+          if(dev_tok)
+            dev_tok.update(:token=>device_token)
+          end
             #---------- Cambiar authentication token ----------
             user.auth_token = nil
             o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
@@ -45,7 +47,8 @@ module Api
             #--------------------------------------------------
 
             if user.save
-                render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
+              DeviceToken.new(id_user: user.id, token: "").save
+              render json: { status: 'SUCCESS', message: 'USUARIO REGISTRADO', data:user }, status: :created
             else
                 render json: { status: 'ERROR', message: 'USUARIO NO CREADO' }, status: :bad
             end
