@@ -136,7 +136,7 @@ module Api
 
                 #notifications
                 push_notif = PushNotification.new
-                push_notif.createNotification(1, eve)
+                push_notif.createNotification(1, event)
 
                 idCom = event.id_community
                 members = CommunityMember.where(id_community: idCom)
