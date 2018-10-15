@@ -18,6 +18,9 @@ module Api
                     #--------------------------------------------------
 
                     #notifications
+                    push_notif = PushNotification.new
+                    push_notif.createNotification(1, eve)
+
                     isApproved = params[:approved]
                     if(isApproved == "true")
                         members = CommunityMember.where(id_community: params[:id_community])
