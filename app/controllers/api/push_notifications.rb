@@ -45,6 +45,7 @@ module Api
                 device = DeviceToken.where(id_user: member.id_user).first
                 registration_ids.push(device.token)
             end
+            registration_ids
         end
 
         #def printSomething
