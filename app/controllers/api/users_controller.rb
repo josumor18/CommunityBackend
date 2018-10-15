@@ -7,7 +7,10 @@ module Api
         user = User.where(email: params[:email]).first
         pass = params[:password]
         token = params[:auth_token]
+        device_token = params[:device_token]
         if (user && (user.password == pass || user.auth_token == token))
+          dev_tok = DeviceToken.where(id_usuario: user.id).first
+          dev_tok.update(:token=>device_token)
             #---------- Cambiar authentication token ----------
             user.auth_token = nil
             o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
