@@ -12,10 +12,6 @@ module Api
           dev_tok = DeviceToken.where(id_user: user.id).first
           if(dev_tok)
             dev_tok.update(:token=>device_token)
-
-            pN = PushNotification.new
-            pN.createNotification([device_token])
-            #pN.printSomething
           end
             #---------- Cambiar authentication token ----------
             user.auth_token = nil
