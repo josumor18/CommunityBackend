@@ -36,7 +36,7 @@ module Api
                     collapse_key: "updated_score",
                     data: {
                         tipo: 2,
-                        id: object.id
+                        id: object.id,
                         community_name: community.name,
                         idCommunity: object.idCommunity,
                         title: object.title,
