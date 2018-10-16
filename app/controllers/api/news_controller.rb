@@ -8,6 +8,9 @@ module Api
           if (post.save)
             
             #notifications
+            push_notif = PushNotification.new
+            push_notif.createNotification(2, post)
+            
             isApproved = params[:approved]
             if(isApproved == "true")
               members = CommunityMember.where(id_community: params[:idCommunity])
@@ -87,6 +90,9 @@ module Api
         
         n.update(:approved=>true)
         #notifications
+        push_notif = PushNotification.new
+        push_notif.createNotification(2, n)
+
         idCom = n.idCommunity
         members = CommunityMember.where(id_community: idCom)
         members.each do |item|

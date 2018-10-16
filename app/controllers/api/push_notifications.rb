@@ -17,7 +17,7 @@ module Api
                     priority: "high",
                     collapse_key: "updated_score", 
                     data: {
-                        tipo: tipo,
+                        tipo: 1,
                         id: object.id,
                         id_community: object.id_community,
                         community_name: community.name,
@@ -33,16 +33,17 @@ module Api
             else
                 options = {
                     priority: "high",
-                    collapse_key: "updated_score", 
-                    notification: {
-                        title: "Message Title", 
-                        body: "Hi, Worked perfectly",
-                        icon: "myicon"
-                    },
+                    collapse_key: "updated_score",
                     data: {
-                        tipo: 231,
-                        message: "Este es mi mensaje para tí",
-                        titulo: "Titulito"
+                        tipo: 2,
+                        id: object.id
+                        community_name: community.name,
+                        idCommunity: object.idCommunity,
+                        title: object.title,
+                        description: object.description,
+                        date: object.date,
+                        photo: object.photo,
+                        approved: object.approved
                     }
                 }
             end
