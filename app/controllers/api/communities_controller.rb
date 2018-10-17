@@ -12,7 +12,7 @@ module Api
     
                 if(com.save)
                     CommunityMember.new(id_community: com.id, id_user: user.id, isAdmin: true).save
-                    Chat.new(id_community: params[:id_community], is_group: true).save
+                    Chat.new(id_community: com.id, is_group: true).save
                     #---------- Cambiar authentication token ----------
                     user.auth_token = nil
                     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
