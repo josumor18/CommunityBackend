@@ -28,6 +28,37 @@ module Api
             end
             
         end
+
+        #PUT
+        def edit
+            user = User.where(id: params[:id]).first
+            token = params[:auth_token]
+            if(user.auth_token == token)
+                  com = Community.where(id: params[:idCommunity]).first
+                  if(com)
+                      #---------- Cambiar authentication token ----------
+                      user.auth_token = nil
+                      o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+                      user.auth_token = (0...20).map { o[rand(o.length)] }.join
+                      user.save
+                      #--------------------------------------------------
+                      #:description, :rules, :isSubcommunity, :photo, :photo_thumbnail
+                      com.update(:name=>params[:name])
+                      com.update(:description=>params[:description])
+                      com.update(:rules=>params[:rules])
+                      com.update(:isSubcommunity=>params[:isSubcommunity])
+                      com.update(:photo=>params[:photo])
+                      com.update(:photo_thumbnail=>params[:photo_thumbnail])
+                      render json: { status: 'SUCCESS', message: 'CAMBIO EXITOSO',auth_token:user.auth_token}, status: :ok
+                  else
+                      render json: { status: 'INVALID', message: 'No existe esa comunidad'}, status: :unauthorized
+                  end
+
+            else
+              render json: { status: 'INVALID TOKEN', message: 'Token inválido'}, status: :unauthorized
+              
+            end
+        end
         
         #GET communities
         def get_communities
