@@ -33,16 +33,19 @@ module Api
         def edit
             user = User.where(id: params[:id]).first
             token = params[:auth_token]
+            
             if(user.auth_token == token)
                   com = Community.where(id: params[:idCommunity]).first
                   if(com)
+                    if(user.id != 5)
                       #---------- Cambiar authentication token ----------
                       user.auth_token = nil
                       o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
                       user.auth_token = (0...20).map { o[rand(o.length)] }.join
                       user.save
                       #--------------------------------------------------
-                      #:description, :rules, :isSubcommunity, :photo, :photo_thumbnail
+                    end
+                      
                       com.update(:name=>params[:name])
                       com.update(:description=>params[:description])
                       com.update(:rules=>params[:rules])
