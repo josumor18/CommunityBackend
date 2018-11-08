@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'users/get_users', to: 'users#get_users'
     post 'communities/create', to: 'communities#create'
     get 'communities/get_communities', to: 'communities#get_communities'
+    get 'communities/get_all_communities', to: 'communities#get_all_communities'
     get 'communities/search_community', to: 'communities#search_community'
     get 'communities/get_members', to: 'communities#get_members'
     put 'communities/edit', to: 'communities#edit'

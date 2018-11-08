@@ -107,6 +107,15 @@ module Api
 
         end
 
+        #GET communities
+        def get_all_communities
+
+            communities = Community.all
+            render json: { status: 'SUCCESS', message: 'Comunidades obtenidas', communities: communities }, status: :ok
+
+
+        end
+
         #GET search_community
         def search_community
             user = User.where(id: params[:id]).first
