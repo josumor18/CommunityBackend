@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     put 'users/update_image', to: 'users#update_image'
     get 'users/get_users', to: 'users#get_users'
     post 'communities/create', to: 'communities#create'
+    post 'communities/create_x_comm', to: 'communities#create_x_comm'
     get 'communities/get_communities', to: 'communities#get_communities'
     get 'communities/get_all_communities', to: 'communities#get_all_communities'
     get 'communities/search_community', to: 'communities#search_community'

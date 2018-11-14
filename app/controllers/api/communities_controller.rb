@@ -2,6 +2,11 @@ module Api
     class CommunitiesController < ApplicationController
       protect_from_forgery with: :null_session
 
+      #POST create_x_comm
+      def create_x_comm
+        com = Community.new(community_params)
+      end
+
         #POST create
         def create
             user = User.where(id: params[:id]).first
