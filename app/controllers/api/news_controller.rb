@@ -108,6 +108,21 @@ module Api
       end
     end
 
+    def edit
+      n = New.where(id: params[:id]).first
+      if (n)
+        
+        n.update(:title=>params[:title])
+        n.update(:description=>params[:description])
+
+        render json: { status: 'SUCCESS', message: 'EDICION EXITOSA'}, status: :ok
+      else
+        render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
+        
+      end
+
+    end
+
     def delete_news
       n = New.where(id: params[:id]).first
       if (n)
