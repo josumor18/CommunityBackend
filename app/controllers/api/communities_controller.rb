@@ -25,6 +25,17 @@ module Api
         end
     end
 
+    #DELETE delete_x_comm
+    def delete_x_comm
+        c = Community.where(id: params[:id]).first
+        if(c)
+            Community.where(id: params[:id]).destroy_all
+            render json: { status: 'SUCCESS', message: 'ELIMINACION EXITOSA'}, status: :ok
+        else
+            render json: { status: 'INVALID', message: 'NO ENCONTRADA'}, status: :unauthorized
+        end
+    end
+
         #POST create
         def create
             user = User.where(id: params[:id]).first
