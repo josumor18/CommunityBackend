@@ -5,6 +5,11 @@ module Api
       #POST create_x_comm
       def create_x_comm
         com = Community.new(community_params)
+        if(comm.save)
+            render json: { status: 'SUCCESS', message: 'Comunidad creada' }, status: :created
+        else
+            render json: { status: 'INVALID', message: 'Error al crear comunidad'}, status: :unauthorized
+        end
       end
 
         #POST create
