@@ -12,6 +12,19 @@ module Api
         end
       end
 
+    #PUT edit_x_comm
+    def edit_x_comm
+        com = Community.where(id: params[:idCommunity]).first
+        if(com)
+            com.update(:name=>params[:name])
+            com.update(:description=>params[:description])
+            com.update(:photo=>params[:photo])
+            render json: { status: 'SUCCESS', message: 'CAMBIO EXITOSO'}, status: :ok
+        else
+            render json: { status: 'INVALID', message: 'No existe esa comunidad'}, status: :unauthorized
+        end
+    end
+
         #POST create
         def create
             user = User.where(id: params[:id]).first
